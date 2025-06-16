@@ -1,3 +1,27 @@
+ // Initialize EmailJS with your user ID
+ (function () {
+    emailjs.init('JxM6LUWtz2xFEiF8x'); // Replace with your actual public key
+    console.log("[xxx]: ", emailjs)
+  })();
+  // Contact form handling
+
+document.addEventListener('DOMContentLoaded', function () {
+    console.log("DOM is fully loaded");
+    const contactForm = document.getElementById('contactForm');
+
+    // Form submission handler
+    contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        emailjs.sendForm('service_sa3llmo', 'template_5ig2jmo', this).then(function () {
+            console.log("[xxxx]: ", this)
+            alert('Inquiry sent successfully!');
+            contactForm.reset();
+        }, function (error) {
+            alert('Failed to send inquiry. Error: ' + JSON.stringify(error));
+        });
+    });
+})
 // Mobile menu functionality
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
@@ -17,22 +41,22 @@ mobileMenuLinks.forEach(link => {
 // Testimonials data
 const testimonials = [
     {
-        name: 'Sarah Johnson',
-        company: 'Bloom Café',
+        name: '',
+        company: '',
         text: 'The custom coasters with our café logo are absolutely perfect! The quality is outstanding and our customers always compliment them.',
         rating: 5,
         image: 'https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=150'
     },
     {
-        name: 'Michael Chen',
-        company: 'Wedding Planner',
+        name: '',
+        company: '',
         text: 'Ordered 200 personalized coasters for a wedding. They exceeded expectations - beautiful quality and arrived on time!',
         rating: 5,
         image: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150'
     },
     {
-        name: 'Emma Rodriguez',
-        company: 'Home Enthusiast',
+        name: '',
+        company: '',
         text: 'These coasters are not just functional but genuine pieces of art. They\'ve become conversation starters at dinner parties!',
         rating: 5,
         image: 'https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=150'
@@ -50,9 +74,6 @@ function updateTestimonial() {
     const testimonialCard = document.querySelector('.testimonial-card');
     
     testimonialCard.innerHTML = `
-        <div class="testimonial-image">
-            <img src="${testimonial.image}" alt="${testimonial.name}">
-        </div>
         <div class="testimonial-rating">
             ${'<span class="star">★</span>'.repeat(testimonial.rating)}
         </div>
@@ -82,24 +103,8 @@ setInterval(() => {
     updateTestimonial();
 }, 5000);
 
-// Contact form handling
-const contactForm = document.getElementById('contactForm');
 
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const formData = new FormData(contactForm);
-    const data = {
-        name: formData.get('name'),
-        email: formData.get('email'),
-        quantity: formData.get('quantity'),
-        message: formData.get('message')
-    };
-    
-    console.log('Form submitted:', data);
-    alert('Thank you for your inquiry! We\'ll get back to you soon.');
-    contactForm.reset();
-});
+
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
